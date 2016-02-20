@@ -27,12 +27,20 @@ public class OrbitingScript : MonoBehaviour {
 				released = true;
 
 				rb.transform.LookAt (asteroidObject.transform);
-				rb.transform.RotateAround(rb.position,Vector3.up,270.0f);
+
+				if(clockwise == true)
+					rb.transform.RotateAround(rb.position, Vector3.up, 270.0f);
+				else
+					rb.transform.RotateAround(rb.position, Vector3.up, 90.0f);
+
 				//rb.AddForce (new Vector3 (0, 0, -500));
 				//rb.AddForce (rb.transform.Translate(-Vector3.forward * Time.deltaTime*100));
 			}
 
-			rb.transform.RotateAround (asteroidObject.transform.position, Vector3.up, 100 * Time.deltaTime);
+			if (clockwise == true)
+				rb.transform.RotateAround (asteroidObject.transform.position, Vector3.up, 100 * Time.deltaTime);
+			else
+				rb.transform.RotateAround (asteroidObject.transform.position, Vector3.up, -100 * Time.deltaTime);
 
 		}  else {
 			
@@ -69,10 +77,13 @@ public class OrbitingScript : MonoBehaviour {
 	*/
 
 	void OnTriggerEnter (Collider other) {
+
+		asteroidObject = other.attachedRigidbody.gameObject;
 		Debug.Log ("Coliided " + other.tag);
+
 		if (released == true && other.tag == "Asteroid") {
+			clockwise = DetermineRotationDirection (other.attachedRigidbody.gameObject);
 			released = false;
-			asteroidObject = other.attachedRigidbody.gameObject;
 
 			/*
 			RaycastHit hit;
@@ -84,4 +95,16 @@ public class OrbitingScript : MonoBehaviour {
 		}
 
 	}
+
+	bool DetermineRotationDirection (GameObject go) {
+
+		Vector3 dir = (go.transform.position - rb.transform.position).normalized;
+
+		float direction = Vector3.Dot (dir, transform.right);
+
+		// Asteroid is to the left of the ship
+		return direction > 0;
+
+	}
+
 }
