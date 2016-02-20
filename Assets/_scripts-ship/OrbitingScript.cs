@@ -2,37 +2,43 @@
 using System.Collections;
 
 public class OrbitingScript : MonoBehaviour {
+
+	public int startSpeed;
 	public int speed;
+	public bool clockwise;  // True = 
 
 	private Rigidbody rb;
 	private GameObject asteroidObject;
 	private bool released;
 
+
 	// Use this for initialization
 	void Start () {
 		rb = this.GetComponent<Rigidbody> ();
 		asteroidObject = GameObject.FindGameObjectWithTag ("Asteroid");
-		released = false;
+		released = true;
 	}
 
 	// Update is called once per frame
 	void Update () {
+		
 		if (!released) {
 			if (Input.GetButton ("Fire1")) {
 				released = true;
 
+				rb.transform.LookAt (asteroidObject.transform);
+				rb.transform.RotateAround(rb.position,Vector3.up,270.0f);
 				//rb.AddForce (new Vector3 (0, 0, -500));
 				//rb.AddForce (rb.transform.Translate(-Vector3.forward * Time.deltaTime*100));
 			}
 
 			rb.transform.RotateAround (asteroidObject.transform.position, Vector3.up, 100 * Time.deltaTime);
 
-		} else {
-			rb.transform.Translate (-Vector3.forward * Time.deltaTime * speed );
-
+		}  else {
+			
+			rb.transform.Translate (Vector3.forward * Time.deltaTime * speed);
 		}
 	}
-
 
 
 	/*
@@ -60,13 +66,22 @@ public class OrbitingScript : MonoBehaviour {
 		float distance = Vector3.Distance (asteroidTransform.position, ship.position);
 		rb.AddForce (line * 10 / distance);
 	}
+	*/
 
-	void OnTriggerEnter(Collider other) 
-	{
-		if (other.tag == "Asteroid")
-		{
-			;
+	void OnTriggerEnter (Collider other) {
+		Debug.Log ("Coliided " + other.tag);
+		if (released == true && other.tag == "Asteroid") {
+			released = false;
+			asteroidObject = other.attachedRigidbody.gameObject;
+
+			/*
+			RaycastHit hit;
+			var ray = new Ray(transform.position, Vector3.down);
+			if (other.Raycast(ray, out hit, 1000)) {
+				transform.rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
+			}
+			*/
 		}
 
-	}*/
+	}
 }
