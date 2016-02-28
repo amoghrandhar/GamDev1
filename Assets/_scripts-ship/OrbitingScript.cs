@@ -25,17 +25,17 @@ public class OrbitingScript : MonoBehaviour {
 		if (!released) {
 			if (Input.GetButton ("Fire1")) {
 				released = true;
-
-				rb.transform.LookAt (asteroidObject.transform);
-
-				if(clockwise == true)
-					rb.transform.RotateAround(rb.position, Vector3.up, 270.0f);
-				else
-					rb.transform.RotateAround(rb.position, Vector3.up, 90.0f);
-
 				//rb.AddForce (new Vector3 (0, 0, -500));
 				//rb.AddForce (rb.transform.Translate(-Vector3.forward * Time.deltaTime*100));
 			}
+
+			rb.transform.LookAt (asteroidObject.transform);
+
+			if(clockwise == true)
+				rb.transform.RotateAround(rb.position, Vector3.up, 270.0f);
+			else
+				rb.transform.RotateAround(rb.position, Vector3.up, 90.0f);
+			
 
 			if (clockwise == true)
 				rb.transform.RotateAround (asteroidObject.transform.position, Vector3.up, 100 * Time.deltaTime);
