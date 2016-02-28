@@ -3,7 +3,8 @@ using System.Collections;
 
 public class OrbitingScript : MonoBehaviour {
 
-	public float speed;
+	public int startSpeed;
+	public int speed;
 	public bool clockwise;  // True = 
 
 	private Rigidbody rb;
@@ -25,23 +26,16 @@ public class OrbitingScript : MonoBehaviour {
 			if (Input.GetButton ("Fire1")) {
 				released = true;
 
-				float radius = Vector3.Distance (rb.transform.position, asteroidObject.transform.position);
-				float angular = (100) * Mathf.Deg2Rad;
+				rb.transform.LookAt (asteroidObject.transform);
 
-				speed = radius * angular;
-
+				if(clockwise == true)
+					rb.transform.RotateAround(rb.position, Vector3.up, 270.0f);
+				else
+					rb.transform.RotateAround(rb.position, Vector3.up, 90.0f);
 
 				//rb.AddForce (new Vector3 (0, 0, -500));
 				//rb.AddForce (rb.transform.Translate(-Vector3.forward * Time.deltaTime*100));
 			}
-
-			rb.transform.LookAt (asteroidObject.transform);
-
-			if(clockwise == true)
-				rb.transform.RotateAround(rb.position, Vector3.up, 270.0f);
-			else
-				rb.transform.RotateAround(rb.position, Vector3.up, 90.0f);
-			
 
 			if (clockwise == true)
 				rb.transform.RotateAround (asteroidObject.transform.position, Vector3.up, 100 * Time.deltaTime);
