@@ -34,4 +34,8 @@ sysinfo.txt
 
     [mergetool "unityyamlmerge"]
     trustExitCode = false
+<<<<<<< HEAD
     cmd = '<path to UnityYAMLMerge>' merge -p "$BASE" "$REMOTE" "$LOCAL" "$MERGED"
+=======
+    cmd = '<path to UnityYAMLMerge>' merge -p "$BASE" "$REMOTE" "$LOCAL" "$MERGED"
+>>>>>>> origin/master
