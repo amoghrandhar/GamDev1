@@ -2,6 +2,9 @@
 using System.Collections;
 
 public class DestroyBySide : MonoBehaviour {
+
+	public GameObject explosion;
+
 	void Start (){
 		// Get reference to ShipController
 	}
@@ -12,6 +15,7 @@ public class DestroyBySide : MonoBehaviour {
 			// Call destroy method on ShipController, which checks if the player is orbiting an asteroid before destroying it
 		} else {
 			// Destroy asteroids that have gone off-screen
+			Instantiate(explosion, other.transform.position, other.transform.rotation);
 			Destroy(other.gameObject);
 		}
 
