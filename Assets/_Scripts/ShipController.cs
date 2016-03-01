@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
-public class OrbitingScript : MonoBehaviour {
+public class ShipController : MonoBehaviour {
 
 	public float speed;
 	public float asteroidBoost;
@@ -33,7 +33,7 @@ public class OrbitingScript : MonoBehaviour {
 	void Update () {
 
 		if (!gameStarted) {
-			
+
 			if (Input.GetButton ("Fire1")) {
 				audio.Play ();
 				gameStarted = true;
@@ -119,7 +119,7 @@ public class OrbitingScript : MonoBehaviour {
 		if (released == true && other.tag == "Asteroid") {
 			asteroidObject = other.attachedRigidbody.gameObject;
 
-			Mover astMover = asteroidObject.GetComponent<Mover> ();
+			AsteroidHandler astMover = asteroidObject.GetComponent<AsteroidHandler> ();
 			asteroidSpeed = astMover.speed;
 
 			clockwise = DetermineRotationDirection (other.attachedRigidbody.gameObject);

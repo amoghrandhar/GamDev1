@@ -1,8 +1,7 @@
 using UnityEngine;
 using System.Collections;
-using UnityEditor;
 
-public class Mover : MonoBehaviour
+public class AsteroidHandler : MonoBehaviour
 {
     public float speed;
 

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Gamecontroller : MonoBehaviour {
+public class GameController : MonoBehaviour {
 
     public GameObject asteroid;
     public Vector3 spawnValues;
@@ -22,7 +22,7 @@ public class Gamecontroller : MonoBehaviour {
         Vector3 spawnPosition = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
         Quaternion spawnRotation = Quaternion.identity;
         Instantiate(asteroid, spawnPosition, spawnRotation);
-        Mover ast = asteroid.GetComponent<Mover>();
+		AsteroidHandler ast = asteroid.GetComponent<AsteroidHandler>();
         ast.speed = 5;
         SpriteRenderer rendererCol = asteroid.GetComponentInChildren<SpriteRenderer>();
         rendererCol.color = new Color(Random.value , Random.value , Random.value, 1f); // Set to opaque black

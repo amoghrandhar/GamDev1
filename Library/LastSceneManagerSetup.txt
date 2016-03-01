@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/OrbitScene.unity
+- path: Assets/Scenes/OrbitScene.unity
   isLoaded: 1
   isActive: 1

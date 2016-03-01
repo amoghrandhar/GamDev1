@@ -94,9 +94,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 41667241}
   - 54: {fileID: 41667240}
-  - 114: {fileID: 41667239}
   - 135: {fileID: 41667238}
   - 82: {fileID: 41667242}
+  - 114: {fileID: 41667239}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Untagged
@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7eb06295b06bce647be3cb58fc754860, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 8
+  speed: 5
   asteroidBoost: 150
   clockwise: 0
   audio: {fileID: 0}
@@ -169,7 +169,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: aa3052fed2295413181dbaf316b273ac, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -556,68 +556,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
---- !u!1001 &522543838
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 483538, guid: e159d4d98121df64dafa1913e38f0928, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -9.39
-      objectReference: {fileID: 0}
-    - target: {fileID: 483538, guid: e159d4d98121df64dafa1913e38f0928, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 483538, guid: e159d4d98121df64dafa1913e38f0928, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 12.57
-      objectReference: {fileID: 0}
-    - target: {fileID: 483538, guid: e159d4d98121df64dafa1913e38f0928, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 483538, guid: e159d4d98121df64dafa1913e38f0928, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0.008726536
-      objectReference: {fileID: 0}
-    - target: {fileID: 483538, guid: e159d4d98121df64dafa1913e38f0928, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 483538, guid: e159d4d98121df64dafa1913e38f0928, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 0.9999619
-      objectReference: {fileID: 0}
-    - target: {fileID: 483538, guid: e159d4d98121df64dafa1913e38f0928, type: 2}
-      propertyPath: m_RootOrder
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 21211174, guid: e159d4d98121df64dafa1913e38f0928, type: 2}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 21211174, guid: e159d4d98121df64dafa1913e38f0928, type: 2}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 21211174, guid: e159d4d98121df64dafa1913e38f0928, type: 2}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 21211174, guid: e159d4d98121df64dafa1913e38f0928, type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11415652, guid: e159d4d98121df64dafa1913e38f0928, type: 2}
-      propertyPath: speed
-      value: 2
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: e159d4d98121df64dafa1913e38f0928, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &707490935
 GameObject:
   m_ObjectHideFlags: 0
@@ -732,7 +670,7 @@ Transform:
   - {fileID: 1441886742}
   - {fileID: 1626737670}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
 --- !u!1 &1127708200
 GameObject:
   m_ObjectHideFlags: 0
@@ -882,7 +820,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   asteroid: {fileID: 162518, guid: e159d4d98121df64dafa1913e38f0928, type: 2}
-  spawnValues: {x: 9.7, y: 0, z: 16}
+  spawnValues: {x: 9.7, y: 0, z: 0}
 --- !u!1 &1454526149
 GameObject:
   m_ObjectHideFlags: 0
