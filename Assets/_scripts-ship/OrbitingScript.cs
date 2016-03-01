@@ -16,6 +16,8 @@ public class OrbitingScript : MonoBehaviour {
 	private float time;
 	private bool gameStarted;
 
+	private float asteroidSpeed;
+
 
 	// Use this for initialization
 	void Start () {
@@ -55,18 +57,26 @@ public class OrbitingScript : MonoBehaviour {
 				//rb.AddForce (rb.transform.Translate(-Vector3.forward * Time.deltaTime*100));
 			}
 
+			// Orient ship in direction of rotation
 			rb.transform.LookAt (asteroidObject.transform);
+			if (clockwise) {
+				rb.transform.RotateAround (rb.position, Vector3.up, 270.0f);
+			} else {
+				rb.transform.RotateAround (rb.position, Vector3.up, 90.0f);
+			}
 
-			if(clockwise == true)
-				rb.transform.RotateAround(rb.position, Vector3.up, 270.0f);
-			else
-				rb.transform.RotateAround(rb.position, Vector3.up, 90.0f);
-			
 
-			if (clockwise == true)
+
+			// Move with asteroid
+			transform.position += -asteroidSpeed*Vector3.forward * Time.deltaTime ;
+
+
+			// Rotate around asteroid
+			if (clockwise == true) {
 				rb.transform.RotateAround (asteroidObject.transform.position, Vector3.up, asteroidBoost * Time.deltaTime);
-			else
+			} else {
 				rb.transform.RotateAround (asteroidObject.transform.position, Vector3.up, -asteroidBoost * Time.deltaTime);
+			}
 
 		}  else if (gameStarted) { 
 			rb.transform.Translate (Vector3.forward * Time.deltaTime * speed);
@@ -108,6 +118,10 @@ public class OrbitingScript : MonoBehaviour {
 
 		if (released == true && other.tag == "Asteroid") {
 			asteroidObject = other.attachedRigidbody.gameObject;
+
+			Mover astMover = asteroidObject.GetComponent<Mover> ();
+			asteroidSpeed = astMover.speed;
+
 			clockwise = DetermineRotationDirection (other.attachedRigidbody.gameObject);
 			released = false;
 
