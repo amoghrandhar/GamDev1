@@ -11,19 +11,38 @@ public class OrbitingScript : MonoBehaviour {
 	private GameObject asteroidObject;
 	private bool released;
 
+	public AudioSource audio;
+	private int asteroidCount;
+	private float time;
+	private bool gameStarted;
+
 
 	// Use this for initialization
 	void Start () {
+		audio = GetComponent<AudioSource>();
 		rb = this.GetComponent<Rigidbody> ();
 		asteroidObject = GameObject.FindGameObjectWithTag ("Asteroid");
 		released = true;
+		asteroidCount = 0;
+		gameStarted = false;
 	}
 
 	// Update is called once per frame
 	void Update () {
-		
-		if (!released) {
+
+		if (!gameStarted) {
+			
 			if (Input.GetButton ("Fire1")) {
+				audio.Play ();
+				gameStarted = true;
+			}
+
+		}
+
+		if (!released && gameStarted) {
+			if (Input.GetButton ("Fire1")) {
+
+				audio.Play ();
 				released = true;
 
 				float radius = Vector3.Distance (rb.transform.position, asteroidObject.transform.position);
@@ -47,10 +66,9 @@ public class OrbitingScript : MonoBehaviour {
 			if (clockwise == true)
 				rb.transform.RotateAround (asteroidObject.transform.position, Vector3.up, asteroidBoost * Time.deltaTime);
 			else
-				rb.transform.RotateAround (asteroidObject.transform.position, Vector3.up, asteroidBoost * Time.deltaTime);
+				rb.transform.RotateAround (asteroidObject.transform.position, Vector3.up, -asteroidBoost * Time.deltaTime);
 
-		}  else {
-			
+		}  else if (gameStarted) { 
 			rb.transform.Translate (Vector3.forward * Time.deltaTime * speed);
 		}
 	}
@@ -85,10 +103,11 @@ public class OrbitingScript : MonoBehaviour {
 
 	void OnTriggerEnter (Collider other) {
 
-		asteroidObject = other.attachedRigidbody.gameObject;
-		Debug.Log ("Coliided " + other.tag);
+		if (other.tag == "Boundary")
+			return;
 
 		if (released == true && other.tag == "Asteroid") {
+			asteroidObject = other.attachedRigidbody.gameObject;
 			clockwise = DetermineRotationDirection (other.attachedRigidbody.gameObject);
 			released = false;
 
