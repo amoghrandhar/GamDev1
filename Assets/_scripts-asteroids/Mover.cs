@@ -4,7 +4,7 @@ using UnityEditor;
 
 public class Mover : MonoBehaviour
 {
-    public Rigidbody rb;
+    private Rigidbody rb;
     public float speed;
 
     // Use this for initialization
@@ -17,6 +17,6 @@ public class Mover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+		
     }
 }

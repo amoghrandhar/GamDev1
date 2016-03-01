@@ -26,8 +26,8 @@ GameObject:
   - 4: {fileID: 452730}
   - 54: {fileID: 5419894}
   - 114: {fileID: 11477840}
-  - 135: {fileID: 13519102}
   - 114: {fileID: 11496514}
+  - 135: {fileID: 13519102}
   m_Layer: 0
   m_Name: Asteroid
   m_TagString: Asteroid
@@ -83,12 +83,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 160492}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c4ae0614a1632348997677d242b93aa, type: 3}
+  m_Script: {fileID: 11500000, guid: 56fa331c2d8259a439786152164f2710, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tumble: 1
-  rb: {fileID: 5419894}
-  sc: {fileID: 13519102}
+  rb: {fileID: 0}
+  speed: 1
 --- !u!114 &11496514
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -97,11 +96,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 160492}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74a22b1c2b7175e47a42c3846e56bf84, type: 3}
+  m_Script: {fileID: 11500000, guid: 157dafbfe4ecc7840a910caf0b9bc9f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tumble: 1
   rb: {fileID: 0}
-  speed: 1
+  sc: {fileID: 0}
 --- !u!135 &13519102
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -150,8 +150,20 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: speed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: tumble
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 160492}
-  m_IsPrefabParent: 1s
+  m_IsPrefabParent: 1

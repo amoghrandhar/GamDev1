@@ -4,7 +4,8 @@ using System.Collections;
 public class OrbitingScript : MonoBehaviour {
 
 	public float speed;
-	public bool clockwise;  // True = 
+	public float asteroidBoost;
+	public bool clockwise;
 
 	private Rigidbody rb;
 	private GameObject asteroidObject;
@@ -26,7 +27,7 @@ public class OrbitingScript : MonoBehaviour {
 				released = true;
 
 				float radius = Vector3.Distance (rb.transform.position, asteroidObject.transform.position);
-				float angular = (100) * Mathf.Deg2Rad;
+				float angular = (asteroidBoost) * Mathf.Deg2Rad;
 
 				speed = radius * angular;
 
@@ -44,9 +45,9 @@ public class OrbitingScript : MonoBehaviour {
 			
 
 			if (clockwise == true)
-				rb.transform.RotateAround (asteroidObject.transform.position, Vector3.up, 100 * Time.deltaTime);
+				rb.transform.RotateAround (asteroidObject.transform.position, Vector3.up, asteroidBoost * Time.deltaTime);
 			else
-				rb.transform.RotateAround (asteroidObject.transform.position, Vector3.up, -100 * Time.deltaTime);
+				rb.transform.RotateAround (asteroidObject.transform.position, Vector3.up, asteroidBoost * Time.deltaTime);
 
 		}  else {
 			
