@@ -4,30 +4,42 @@ using System.Collections;
 public class GameController : MonoBehaviour {
 
     public GameObject asteroid;
+	public GameObject ship;
+	private AsteroidHandler asteroidHandler;
+	private ShipController shipController;
+
     public Vector3 spawnValues;
 	public AudioSource music;
+
 	private int time;
 
     // Use this for initialization
     void Start () {
 		music = GetComponent<AudioSource>();
 		music.Play ();
-        SpawnWaves();
-		time = 0;
+		shipController = ship.GetComponent<ShipController>();
+		asteroidHandler = asteroid.GetComponent<AsteroidHandler> ();
+		asteroidHandler.speed = 1.5f;
+		time = 250;
     }
 	
 	// Update is called once per frame
 	void Update () {
 
-		if (time > 250) {
-		
-			SpawnWaves ();
-			Debug.Log ("hello");
-			time = 0;
-		
-		}
+		if (shipController.getAsteroidCount() > 0) {
 
-		time++;
+			if (time > 1000) {
+				asteroidHandler.speed = 4;
+				shipController.asteroidBoost = 180;
+			}
+
+			if (time % 250 == 0) {
+				SpawnWaves ();
+			}
+
+			time++;
+
+		}
 	
 	}
 

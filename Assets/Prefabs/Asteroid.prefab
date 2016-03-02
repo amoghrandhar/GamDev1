@@ -86,7 +86,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56fa331c2d8259a439786152164f2710, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 4
 --- !u!114 &11424716
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -99,8 +99,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tumble: 1
-  rb: {fileID: 0}
-  sc: {fileID: 0}
 --- !u!135 &13590160
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -156,7 +154,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: speed
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Color.r

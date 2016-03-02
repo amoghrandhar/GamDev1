@@ -128,9 +128,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7eb06295b06bce647be3cb58fc754860, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
-  asteroidBoost: 250
+  speed: 6
+  asteroidBoost: 120
   clockwise: 0
+  arrow: {fileID: 121583294}
   audio: {fileID: 0}
 --- !u!54 &41667240
 Rigidbody:
@@ -154,7 +155,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 41667237}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.1, y: 0, z: -10.81}
+  m_LocalPosition: {x: 0.1, y: 0, z: -13.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1996316258}
@@ -1256,6 +1257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   asteroid: {fileID: 162518, guid: e159d4d98121df64dafa1913e38f0928, type: 2}
+  ship: {fileID: 41667237}
   spawnValues: {x: 9.7, y: 0, z: 17}
   music: {fileID: 1453383327}
 --- !u!82 &1453383327
@@ -1358,7 +1360,7 @@ Transform:
   m_GameObject: {fileID: 1454526149}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.125, y: 1, z: 1}
+  m_LocalScale: {x: 1.2093749, y: 1, z: 1}
   m_Children:
   - {fileID: 391980745}
   m_Father: {fileID: 1960677342}
@@ -1536,7 +1538,7 @@ Transform:
   m_GameObject: {fileID: 1960677341}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.0125, y: 1, z: 1}
   m_Children:
   - {fileID: 1454526150}
   - {fileID: 231850448}
@@ -1649,11 +1651,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11415652, guid: e159d4d98121df64dafa1913e38f0928, type: 2}
       propertyPath: speed
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 162518, guid: e159d4d98121df64dafa1913e38f0928, type: 2}
       propertyPath: m_TagString
-      value: Asteroid
+      value: Asteroid1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e159d4d98121df64dafa1913e38f0928, type: 2}

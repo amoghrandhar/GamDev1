@@ -9,6 +9,7 @@ public class ShipController : MonoBehaviour {
 
 	private Rigidbody rb;
 	private GameObject asteroidObject;
+	public GameObject arrow;
 	private bool released;
 
 	public AudioSource audio;
@@ -37,6 +38,7 @@ public class ShipController : MonoBehaviour {
 			if (Input.GetButton ("Fire1")) {
 				audio.Play ();
 				gameStarted = true;
+				arrow.GetComponent<Renderer>().enabled = false;
 			}
 
 		}
@@ -44,8 +46,9 @@ public class ShipController : MonoBehaviour {
 		if (!released && gameStarted) {
 			if (Input.GetButton ("Fire1")) {
 
-				audio.Play ();
 				released = true;
+				audio.Play ();
+				arrow.GetComponent<Renderer>().enabled = false;
 
 				float radius = Vector3.Distance (rb.transform.position, asteroidObject.transform.position);
 				float angular = (asteroidBoost) * Mathf.Deg2Rad;
@@ -116,14 +119,22 @@ public class ShipController : MonoBehaviour {
 		if (other.tag == "Boundary")
 			return;
 
-		if (released == true && other.tag == "Asteroid") {
+		if (released == true && (other.tag == "Asteroid" || other.tag == "Asteroid1")) {
+
+			arrow.GetComponent<Renderer>().enabled = true;
+			
 			asteroidObject = other.attachedRigidbody.gameObject;
 
 			AsteroidHandler astMover = asteroidObject.GetComponent<AsteroidHandler> ();
 			asteroidSpeed = astMover.speed;
 
 			clockwise = DetermineRotationDirection (other.attachedRigidbody.gameObject);
+
+			if (other.tag == "Asteroid1")
+				astMover.speed = 0.8f;
+
 			released = false;
+			asteroidCount++;
 
 			/*
 			RaycastHit hit;
@@ -147,10 +158,12 @@ public class ShipController : MonoBehaviour {
 
 	}
 
-	public bool isReleased(){
-
+	public bool isReleased() {
 		return released;
+	}
 
+	public int getAsteroidCount() {
+		return asteroidCount;
 	}
 
 }

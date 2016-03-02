@@ -1,16 +1,15 @@
 using UnityEngine;
 using System.Collections;
 
-public class AsteroidRotator : MonoBehaviour
-{
+public class AsteroidRotator : MonoBehaviour {
 
     public float tumble;
-    public Rigidbody rb;
-    public SphereCollider sc;
+    private Rigidbody rb;
+    private SphereCollider sc;
 
 
     // Use this for initialization
-    void Start(){
+    void Start() {
 		
         rb = this.GetComponent<Rigidbody>();
 
@@ -23,7 +22,8 @@ public class AsteroidRotator : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
+		
     }
+
 }
