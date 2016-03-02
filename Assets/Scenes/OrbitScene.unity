@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
-  asteroidBoost: 120
+  asteroidBoost: 100
   clockwise: 0
   button: 323
   arrow: {fileID: 121583294}
@@ -1317,12 +1317,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   asteroid: {fileID: 162518, guid: e159d4d98121df64dafa1913e38f0928, type: 2}
   ship: {fileID: 41667237}
-  spawnValues: {x: 9.7, y: 0, z: 17}
+  ship2: {fileID: 1806936234}
   music: {fileID: 1453383327}
-  spawnWait: 1
-  startWait: 3
-  wavewait: 1
-  asteroidCountToStartWith: 4
+  spawnValues: {x: 11.5, y: 0, z: 17}
+  spawnWait: 2
+  waveWait: 1
+  asteroidCountToStartWith: 1
 --- !u!82 &1453383327
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1658,7 +1658,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
-  asteroidBoost: 120
+  asteroidBoost: 100
   clockwise: 0
   button: 32
   arrow: {fileID: 311567675}
