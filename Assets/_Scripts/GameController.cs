@@ -42,6 +42,7 @@ public class GameController : MonoBehaviour
     private int asteroidCount;
 
 	private int numberOfPlayers;
+	private bool gameStart;
 	private bool gameOver;
 
     // Use this for initialization
@@ -74,6 +75,7 @@ public class GameController : MonoBehaviour
 		}			
 
 		gameOver = false;
+		gameStart = false;
 		gameOverText.text = "";
         asteroidHandler = asteroid.GetComponent<AsteroidController>();
 		fastAsteroidController = fastAsteroid.GetComponent<AsteroidController> ();
@@ -191,5 +193,13 @@ public class GameController : MonoBehaviour
     {
         deadPlayers++;
     }
+
+	public bool isStarted () {
+		return gameStart;
+	}
+
+	public void startGame () {
+		gameStart = true;
+	}
 
 }

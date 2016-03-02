@@ -5,6 +5,7 @@ public class ShipController : MonoBehaviour {
 
 	public int playerNumber;
 
+
 	public float speed;
 	public float asteroidBoost;
 	public bool clockwise;
@@ -13,14 +14,14 @@ public class ShipController : MonoBehaviour {
 	private Rigidbody rb;
 	private GameObject asteroidObject;
 	public GameObject arrow;
-	private bool released;
 
 	public AudioSource audio;
+	private GameController gc;
 
 	private int asteroidCount;
 	private float time;
+	private bool released;
 	private bool gameStarted;
-
 	private float asteroidSpeed;
 
 	// Use this for initialization
@@ -30,62 +31,64 @@ public class ShipController : MonoBehaviour {
 		asteroidObject = GameObject.FindGameObjectWithTag ("Asteroid");
 		released = true;
 		asteroidCount = 0;
+		arrow.GetComponent<Renderer> ().enabled = false;
 		gameStarted = false;
+		gc = (GameController) GameObject.Find ("GameController").GetComponent<GameController> ();
 	}
 
 	// Update is called once per frame
 	void Update () {
 
-		if (!gameStarted) {
+		if (!gc.isStarted ()) {
 
-			if (Input.GetKey(button)) {
+			if (Input.GetKey (button)) {
 				audio.Play ();
-				gameStarted = true;
-				arrow.GetComponent<Renderer>().enabled = false;
+				gc.startGame ();
+				arrow.GetComponent<Renderer> ().enabled = false;
 			}
 
-		}
+		} else {
+			if (!released) {
+				if (Input.GetKey (button)) {
 
-		if (!released && gameStarted) {
-			if (Input.GetKey(button)) {
+					released = true;
+					audio.Play ();
+					arrow.GetComponent<Renderer> ().enabled = false;
 
-				released = true;
-				audio.Play ();
-				arrow.GetComponent<Renderer>().enabled = false;
+					float radius = Vector3.Distance (rb.transform.position, asteroidObject.transform.position);
+					float angular = (asteroidBoost) * Mathf.Deg2Rad;
 
-				float radius = Vector3.Distance (rb.transform.position, asteroidObject.transform.position);
-				float angular = (asteroidBoost) * Mathf.Deg2Rad;
-
-				speed = radius * angular;
+					speed = radius * angular;
 
 
-				//rb.AddForce (new Vector3 (0, 0, -500));
-				//rb.AddForce (rb.transform.Translate(-Vector3.forward * Time.deltaTime*100));
+					//rb.AddForce (new Vector3 (0, 0, -500));
+					//rb.AddForce (rb.transform.Translate(-Vector3.forward * Time.deltaTime*100));
+				}
+
+				// Orient ship in direction of rotation
+				rb.transform.LookAt (asteroidObject.transform);
+				if (clockwise) {
+					rb.transform.RotateAround (rb.position, Vector3.up, 270.0f);
+				} else {
+					rb.transform.RotateAround (rb.position, Vector3.up, 90.0f);
+				}
+
+
+
+				// Move with asteroid
+				transform.position += -asteroidSpeed * Vector3.forward * Time.deltaTime;
+
+
+				// Rotate around asteroid
+				if (clockwise == true) {
+					rb.transform.RotateAround (asteroidObject.transform.position, Vector3.up, asteroidBoost * Time.deltaTime);
+				} else {
+					rb.transform.RotateAround (asteroidObject.transform.position, Vector3.up, -asteroidBoost * Time.deltaTime);
+				}
+
+			} else { 
+				rb.transform.Translate (Vector3.forward * Time.deltaTime * speed);
 			}
-
-			// Orient ship in direction of rotation
-			rb.transform.LookAt (asteroidObject.transform);
-			if (clockwise) {
-				rb.transform.RotateAround (rb.position, Vector3.up, 270.0f);
-			} else {
-				rb.transform.RotateAround (rb.position, Vector3.up, 90.0f);
-			}
-
-
-
-			// Move with asteroid
-			transform.position += -asteroidSpeed*Vector3.forward * Time.deltaTime ;
-
-
-			// Rotate around asteroid
-			if (clockwise == true) {
-				rb.transform.RotateAround (asteroidObject.transform.position, Vector3.up, asteroidBoost * Time.deltaTime);
-			} else {
-				rb.transform.RotateAround (asteroidObject.transform.position, Vector3.up, -asteroidBoost * Time.deltaTime);
-			}
-
-		}  else if (gameStarted) { 
-			rb.transform.Translate (Vector3.forward * Time.deltaTime * speed);
 		}
 	}
 
