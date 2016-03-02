@@ -1319,6 +1319,10 @@ MonoBehaviour:
   ship: {fileID: 41667237}
   spawnValues: {x: 9.7, y: 0, z: 17}
   music: {fileID: 1453383327}
+  spawnWait: 1
+  startWait: 3
+  wavewait: 1
+  asteroidCountToStartWith: 4
 --- !u!82 &1453383327
 AudioSource:
   m_ObjectHideFlags: 0
