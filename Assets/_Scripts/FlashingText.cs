@@ -18,15 +18,6 @@ public class FlashingText : MonoBehaviour {
 		StartCoroutine(BlinkText());
 	}
 
-	void Update() {
-
-		if (Input.GetButton ("Fire1")) {
-			isBlinking = false;
-			flashingText.text = blankText;
-		}
-
-	}
-
 	//function to blink the text 
 	public IEnumerator BlinkText(){
 		//blink it forever. You can set a terminating condition depending upon your requirement. Here you can just set the isBlinking flag to false whenever you want the blinking to be stopped.
@@ -39,6 +30,11 @@ public class FlashingText : MonoBehaviour {
 			flashingText.text = textToFlash;
 			yield return new WaitForSeconds(.4f); 
 		}
+	}
+
+	void stopBlinking() {
+		isBlinking = false;
+		flashingText.text = blankText;
 	}
 
 }

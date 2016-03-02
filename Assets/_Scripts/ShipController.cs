@@ -6,6 +6,7 @@ public class ShipController : MonoBehaviour {
 	public float speed;
 	public float asteroidBoost;
 	public bool clockwise;
+	public KeyCode button;
 
 	private Rigidbody rb;
 	private GameObject asteroidObject;
@@ -18,7 +19,6 @@ public class ShipController : MonoBehaviour {
 	private bool gameStarted;
 
 	private float asteroidSpeed;
-
 
 	// Use this for initialization
 	void Start () {
@@ -35,7 +35,7 @@ public class ShipController : MonoBehaviour {
 
 		if (!gameStarted) {
 
-			if (Input.GetButton ("Fire1")) {
+			if (Input.GetKey(button)) {
 				audio.Play ();
 				gameStarted = true;
 				arrow.GetComponent<Renderer>().enabled = false;
@@ -44,7 +44,7 @@ public class ShipController : MonoBehaviour {
 		}
 
 		if (!released && gameStarted) {
-			if (Input.GetButton ("Fire1")) {
+			if (Input.GetKey(button)) {
 
 				released = true;
 				audio.Play ();
