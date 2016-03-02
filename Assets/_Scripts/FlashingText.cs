@@ -21,15 +21,26 @@ public class FlashingText : MonoBehaviour {
 	//function to blink the text 
 	public IEnumerator BlinkText(){
 		//blink it forever. You can set a terminating condition depending upon your requirement. Here you can just set the isBlinking flag to false whenever you want the blinking to be stopped.
-		while(isBlinking){
-			//set the Text's text to blank
+
 			flashingText.text = blankText;
-			//display blank text for 0.5 seconds
-			yield return new WaitForSeconds(.4f);
-			//display “I AM FLASHING TEXT” for the next 0.5 seconds
-			flashingText.text = textToFlash;
-			yield return new WaitForSeconds(.4f); 
-		}
+			yield return new WaitForSeconds(.5f);
+			flashingText.text = "3";
+			yield return new WaitForSeconds(.5f);
+			flashingText.text = blankText;
+			yield return new WaitForSeconds(.5f);
+			flashingText.text = "2";
+			yield return new WaitForSeconds(.5f); 
+			flashingText.text = blankText;
+			yield return new WaitForSeconds(.5f);
+			flashingText.text = "1";
+			yield return new WaitForSeconds(.5f); 
+			flashingText.text = blankText;
+			yield return new WaitForSeconds(.5f);
+			flashingText.text = "Go !";
+			yield return new WaitForSeconds(.5f); 
+			flashingText.text = blankText;
+			yield return new WaitForSeconds(.5f);
+
 	}
 
 	void stopBlinking() {
