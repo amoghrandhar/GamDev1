@@ -6,7 +6,7 @@ using System.Collections;
 public class GameController : MonoBehaviour
 {
 
-    public GameObject asteroid;
+    public GameObject asteroid , SlowAsteroid , fastAsteroid;
 
     //Ships
     public GameObject ship;
