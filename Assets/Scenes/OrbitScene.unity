@@ -2044,6 +2044,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   asteroid: {fileID: 162518, guid: e159d4d98121df64dafa1913e38f0928, type: 2}
+  slowAsteroid: {fileID: 144910, guid: 35e60c66dc69b094297a5215fc2ca446, type: 2}
+  fastAsteroid: {fileID: 179992, guid: 5e28b95dc0d502b4ca107f0eba232307, type: 2}
   ship: {fileID: 41667237}
   ship2: {fileID: 1806936234}
   ship3: {fileID: 1271408290}

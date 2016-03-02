@@ -131,6 +131,14 @@ public class ShipController : MonoBehaviour {
 			AsteroidController astMover = asteroidObject.GetComponent<AsteroidController> ();
 			asteroidSpeed = astMover.speed;
 
+		    if (astMover.asteroidType == AsteroidController.AsteroidType.FAST)
+		    {
+		        asteroidBoost += 50 ;
+		    } else if (astMover.asteroidType == AsteroidController.AsteroidType.SLOW)
+		    {
+		        asteroidBoost -= 50;
+		    }
+
 			clockwise = DetermineRotationDirection (other.attachedRigidbody.gameObject);
 
 			if (other.tag == "Asteroid1")

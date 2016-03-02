@@ -87,7 +87,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tumble: 1
   speed: 1.5
-  asType: 0
+  asteroidType: 2
 --- !u!135 &13585282
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -148,6 +148,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Color.b
       value: 0.25517225
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: asteroidType
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

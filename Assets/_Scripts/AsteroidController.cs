@@ -1,13 +1,22 @@
 using UnityEngine;
 using System.Collections;
 
-public class AsteroidController : MonoBehaviour {
+public class AsteroidController : MonoBehaviour
+{
+
+    public enum AsteroidType
+    {
+        FAST,
+        NORMAL,
+        SLOW
+    };
 
     public float tumble;
     public float speed;
 	private Rigidbody rb;
     private SphereCollider sc;
 
+    public AsteroidType asteroidType;
 
     // Use this for initialization
     void Start() {

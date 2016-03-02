@@ -6,7 +6,7 @@ using System.Collections;
 public class GameController : MonoBehaviour
 {
 
-    public GameObject asteroid , SlowAsteroid , fastAsteroid;
+    public GameObject asteroid , slowAsteroid , fastAsteroid;
 
     //Ships
     public GameObject ship;
@@ -140,7 +140,6 @@ public class GameController : MonoBehaviour
                 shipController.asteroidBoost += 20;
                 spawnWait -= 0.1f;
             }
-
             for (int i = 0; i < asteroidCountToStartWith; i++)
             {
                 Vector3 spawnPosition = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
@@ -148,12 +147,36 @@ public class GameController : MonoBehaviour
                 Instantiate(asteroid, spawnPosition, spawnRotation);
                 asteroidCount++;
                 yield return new WaitForSeconds(spawnWait);
-
             }
+            createSpecialAsteroid();
             yield return new WaitForSeconds(waveWait);
         }
     }
 
+    private void createSpecialAsteroid()
+    {
+        if (asteroidCount % 4 == 0)
+        {
+            if(Random.value >= 0.5) createFastAsteroid();
+            if(Random.value <= 0.5) createSlowAsteroid();
+        }
+    }
+
+    private void createFastAsteroid()
+    {
+        Vector3 spawnPosition = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
+        Quaternion spawnRotation = Quaternion.identity;
+        Instantiate(fastAsteroid, spawnPosition, spawnRotation);
+        asteroidCount++;
+    }
+
+    private void createSlowAsteroid()
+    {
+        Vector3 spawnPosition = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
+        Quaternion spawnRotation = Quaternion.identity;
+        Instantiate(slowAsteroid, spawnPosition, spawnRotation);
+        asteroidCount++;
+    }
 
     public void PlayerDied()
     {
