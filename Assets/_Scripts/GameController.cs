@@ -5,7 +5,7 @@ public class GameController : MonoBehaviour {
 
     public GameObject asteroid;
 	public GameObject ship;
-	private AsteroidHandler asteroidHandler;
+	private AsteroidController asteroidHandler;
 	private ShipController shipController;
 
     public Vector3 spawnValues;
@@ -19,7 +19,7 @@ public class GameController : MonoBehaviour {
 		music = GetComponent<AudioSource>();
 		music.Play ();
 		shipController = ship.GetComponent<ShipController>();
-		asteroidHandler = asteroid.GetComponent<AsteroidHandler> ();
+		asteroidHandler = asteroid.GetComponent<AsteroidController> ();
 		asteroidHandler.speed = 1.5f;
 		time = 250;
 		deadPlayers = 0;

@@ -1645,17 +1645,21 @@ Prefab:
       propertyPath: m_LocalScale.x
       value: 1.7031248
       objectReference: {fileID: 0}
-    - target: {fileID: 11415652, guid: e159d4d98121df64dafa1913e38f0928, type: 2}
+    - target: {fileID: 0}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 11415652, guid: e159d4d98121df64dafa1913e38f0928, type: 2}
+    - target: {fileID: 0}
       propertyPath: speed
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 162518, guid: e159d4d98121df64dafa1913e38f0928, type: 2}
       propertyPath: m_TagString
       value: Asteroid1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11424716, guid: e159d4d98121df64dafa1913e38f0928, type: 2}
+      propertyPath: speed
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e159d4d98121df64dafa1913e38f0928, type: 2}

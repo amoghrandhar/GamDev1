@@ -1,10 +1,11 @@
 using UnityEngine;
 using System.Collections;
 
-public class AsteroidRotator : MonoBehaviour {
+public class AsteroidController : MonoBehaviour {
 
     public float tumble;
-    private Rigidbody rb;
+    public float speed;
+	private Rigidbody rb;
     private SphereCollider sc;
 
 
@@ -23,7 +24,9 @@ public class AsteroidRotator : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-		
+		// Move asteroid
+		transform.position += speed * Vector3.back * Time.deltaTime ;
+
     }
 
 }

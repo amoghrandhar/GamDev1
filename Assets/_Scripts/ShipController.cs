@@ -125,7 +125,7 @@ public class ShipController : MonoBehaviour {
 			
 			asteroidObject = other.attachedRigidbody.gameObject;
 
-			AsteroidHandler astMover = asteroidObject.GetComponent<AsteroidHandler> ();
+			AsteroidController astMover = asteroidObject.GetComponent<AsteroidController> ();
 			asteroidSpeed = astMover.speed;
 
 			clockwise = DetermineRotationDirection (other.attachedRigidbody.gameObject);
