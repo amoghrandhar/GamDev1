@@ -29,6 +29,8 @@ public class GameController : MonoBehaviour
 
     //Asteroids
     private AsteroidController asteroidHandler;
+	private AsteroidController fastAsteroidController;
+	private AsteroidController slowAsteroidController;
 
     public AudioSource music;
     private int deadPlayers;
@@ -74,7 +76,11 @@ public class GameController : MonoBehaviour
 		gameOver = false;
 		gameOverText.text = "";
         asteroidHandler = asteroid.GetComponent<AsteroidController>();
+		fastAsteroidController = fastAsteroid.GetComponent<AsteroidController> ();
+		slowAsteroidController = slowAsteroid.GetComponent<AsteroidController> ();
         asteroidHandler.speed = 1.5f;
+		fastAsteroidController.speed = 2f;
+		slowAsteroidController.speed = 1f;
         deadPlayers = 0;
         asteroidCount = 0;
         StartCoroutine(startWaves());
@@ -137,8 +143,11 @@ public class GameController : MonoBehaviour
             if (asteroidCount % 4 == 0)
             {
                 asteroidHandler.speed += 0.5f;
+				fastAsteroidController.speed += 0.5f;
+				slowAsteroidController.speed += 0.5f;
                 shipController.asteroidBoost += 20;
                 spawnWait -= 0.1f;
+				waveWait -= 0.1f;
             }
             for (int i = 0; i < asteroidCountToStartWith; i++)
             {

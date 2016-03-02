@@ -23,11 +23,14 @@ public class AsteroidController : MonoBehaviour
 		
         rb = this.GetComponent<Rigidbody>();
 
-        transform.localScale = Vector3.one * Random.Range(2, 4);
-        Vector2 vec2 = new Vector2(0, 1.0f);
+		if (this.tag != "Asteroid1") {
+			transform.localScale = Vector3.one * Random.Range (2, 4);
+			sc = this.GetComponent<SphereCollider>();
+			sc.radius = 1.0f;
+		}
+        
+		Vector2 vec2 = new Vector2(0, 1.0f);
         rb.angularVelocity = vec2 * tumble;
-        sc = this.GetComponent<SphereCollider>();
-        sc.radius = 1.0f;
 
     }
 

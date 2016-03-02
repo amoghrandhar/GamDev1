@@ -55,7 +55,7 @@ Transform:
   m_GameObject: {fileID: 142016}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071067}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children: []
   m_Father: {fileID: 431046}
   m_RootOrder: 0
@@ -85,7 +85,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 157dafbfe4ecc7840a910caf0b9bc9f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tumble: 1
+  tumble: 0.5
   speed: 1.5
   asteroidType: 2
 --- !u!135 &13585282
@@ -126,8 +126,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d99466145f3da4e31abed613d65faa8c, type: 3}
-  m_Color: {r: 0, g: 1, b: 0.25517225, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 13ebe715b6aa1458391e5e533b5d2336, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
 --- !u!1001 &100100000
@@ -139,7 +139,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: m_Color.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Color.g
@@ -147,11 +147,28 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Color.b
-      value: 0.25517225
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: asteroidType
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: tumble
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 13ebe715b6aa1458391e5e533b5d2336,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.x
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.y
+      value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
