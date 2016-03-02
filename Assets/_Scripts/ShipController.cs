@@ -39,133 +39,113 @@ public class ShipController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		// Check if any ships have launched
 		if (!gc.isStarted ()) {
 
+			// Start the game if ship launches
 			if (Input.GetKey (button)) {
 				audio.Play ();
 				gc.startGame ();
 				arrow.GetComponent<Renderer> ().enabled = false;
 			}
-
+		
+		// Game has started
 		} else {
+
+			// Check if spaceship is orbiting
 			if (!released) {
+
+				// Check if player has launched spaceship
 				if (Input.GetKey (button)) {
 
 					released = true;
 					audio.Play ();
+
+					// Disable helper arrow when flying
 					arrow.GetComponent<Renderer> ().enabled = false;
 
+					// Match velocity of that when rotating
 					float radius = Vector3.Distance (rb.transform.position, asteroidObject.transform.position);
 					float angular = (asteroidBoost) * Mathf.Deg2Rad;
 
+					// Calculate normal velocity from product of asteroid radius and angular velocity
 					speed = radius * angular;
 
-
-					//rb.AddForce (new Vector3 (0, 0, -500));
-					//rb.AddForce (rb.transform.Translate(-Vector3.forward * Time.deltaTime*100));
 				}
 
 				// Orient ship in direction of rotation
 				rb.transform.LookAt (asteroidObject.transform);
-				if (clockwise) {
+
+				if (clockwise)
 					rb.transform.RotateAround (rb.position, Vector3.up, 270.0f);
-				} else {
+				else 
 					rb.transform.RotateAround (rb.position, Vector3.up, 90.0f);
-				}
-
-
 
 				// Move with asteroid
-				transform.position += -asteroidSpeed * Vector3.forward * Time.deltaTime;
-
+				transform.position += Vector3.back * Time.deltaTime;
 
 				// Rotate around asteroid
-				if (clockwise == true) {
+				if (clockwise == true)
 					rb.transform.RotateAround (asteroidObject.transform.position, Vector3.up, asteroidBoost * Time.deltaTime);
-				} else {
+				else
 					rb.transform.RotateAround (asteroidObject.transform.position, Vector3.up, -asteroidBoost * Time.deltaTime);
-				}
 
 			} else { 
 				rb.transform.Translate (Vector3.forward * Time.deltaTime * speed);
 			}
+
 		}
-	}
-
-
-	/*
-	void Awake(){
-		ship = transform;
-		rb = this.GetComponent<Rigidbody> ();
-		rb.AddForce (transform.forward * 100);
-		rb.AddForce (transform.up * 100);
 
 	}
-
-	// Use this for initialization
-	void Start () {
-		
-
-		GameObject asteroidObject = GameObject.FindGameObjectWithTag ("Asteroid");
-		asteroidTransform = asteroidObject.transform; 
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		Vector3 line = asteroidTransform.position - ship.position;
-		line.Normalize ();
-
-		float distance = Vector3.Distance (asteroidTransform.position, ship.position);
-		rb.AddForce (line * 10 / distance);
-	}
-	*/
 
 	void OnTriggerEnter (Collider other) {
 
+		// Check if collision object is boundary
 		if (other.tag == "Boundary")
 			return;
 
+		// Check if collision object is an asteroid
 		if (released == true && (other.tag == "Asteroid" || other.tag == "Asteroid1")) {
 
+			// Activate helper arrow
 			arrow.GetComponent<Renderer>().enabled = true;
-			
-			asteroidObject = other.attachedRigidbody.gameObject;
 
+			// Get references to asteroid gameobject and controller
+			asteroidObject = other.attachedRigidbody.gameObject;
 			AsteroidController astMover = asteroidObject.GetComponent<AsteroidController> ();
+
+			// Find speed of current asteroid
 			asteroidSpeed = astMover.speed;
 
-		    if (astMover.asteroidType == AsteroidController.AsteroidType.FAST) {
-				if (asteroidBoost < 300) asteroidBoost += 50 ;
-		    } else if (astMover.asteroidType == AsteroidController.AsteroidType.SLOW) {
+			// Modify ship speed if it collides with a special asteroid
+		    if (astMover.asteroidType == AsteroidController.AsteroidType.FAST)
+				if (asteroidBoost < 320) asteroidBoost += 50 ;
+		    else if (astMover.asteroidType == AsteroidController.AsteroidType.SLOW)
 				if (asteroidBoost > 80) asteroidBoost -= 50;
-		    }
 
-			clockwise = DetermineRotationDirection (other.attachedRigidbody.gameObject);
-
+			// Start moving earth if ship collides with it
 			if (other.tag == "Asteroid1")
 				astMover.speed = 0.8f;
+
+			clockwise = DetermineRotationDirection (other.attachedRigidbody.gameObject);
 
 			released = false;
 			asteroidCount++;
 
-			/*
-			RaycastHit hit;
-			var ray = new Ray(transform.position, Vector3.down);
-			if (other.Raycast(ray, out hit, 1000)) {
-				transform.rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
-			}
-			*/
 		}
 
 	}
-
+		
+	// Determines clockwise/anticlockwise spaceship rotation
 	bool DetermineRotationDirection (GameObject go) {
 
+		// Vector between the spaceship and asteroid
 		Vector3 dir = (go.transform.position - rb.transform.position).normalized;
 
+		// Dot product between direction vector and right side of ship
 		float direction = Vector3.Dot (dir, transform.right);
 
-		// Asteroid is to the left of the ship
+		// Return true if asteroid is to the left of the ship
 		return direction > 0;
 
 	}

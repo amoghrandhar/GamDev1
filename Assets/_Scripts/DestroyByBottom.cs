@@ -9,6 +9,7 @@ public class DestroyByBottom : MonoBehaviour {
 	private GameController gc;
 
 	void Start() {
+		
 		audio = GetComponent<AudioSource>();
 		gc = (GameController) GameObject.Find ("GameController").GetComponent<GameController> ();
 
@@ -17,12 +18,14 @@ public class DestroyByBottom : MonoBehaviour {
 	void OnTriggerExit(Collider other){
 		
 		if (other.tag == "Player") {
+			
 			// Notify GameController that a player has died
 			gc.PlayerDied ();
 
 			//  Play sound
 			Instantiate (explosion, other.transform.position, other.transform.rotation);
 			audio.Play ();
+
 		}
 
 		// Destroy everything that goes off bottom of screen

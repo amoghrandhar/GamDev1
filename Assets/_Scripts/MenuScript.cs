@@ -5,10 +5,8 @@ using System.Collections;
 
 public class MenuScript : MonoBehaviour {
 
-	public Canvas quitMenu;
-	public Canvas playerNumberMenu;
-	public Button startText;
-	public Button exitText;
+	public Canvas quitMenu, playerNumberMenu, startMenu;
+	public Button startText, exitText;
 
 	static public int playerCount;
 
@@ -35,6 +33,7 @@ public class MenuScript : MonoBehaviour {
 		playerNumberMenu.enabled = true;
 		startText.enabled = false;
 		exitText.enabled = false;
+		startMenu.enabled = false;
 	}
 
 	// Called when player presses no on confirm, or when player cancels out of choosing number of players
@@ -43,6 +42,7 @@ public class MenuScript : MonoBehaviour {
 		playerNumberMenu.enabled = false;
 		startText.enabled = true;
 		exitText.enabled = true;
+		startMenu.enabled = true;
 	}
 
 	public void OnePlayer(){
