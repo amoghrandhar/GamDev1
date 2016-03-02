@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour {
 	public AudioSource music;
 
 	private int time;
+	private int deadPlayers;
 
     // Use this for initialization
     void Start () {
@@ -21,6 +22,7 @@ public class GameController : MonoBehaviour {
 		asteroidHandler = asteroid.GetComponent<AsteroidHandler> ();
 		asteroidHandler.speed = 1.5f;
 		time = 250;
+		deadPlayers = 0;
     }
 	
 	// Update is called once per frame
@@ -56,5 +58,9 @@ public class GameController : MonoBehaviour {
 
 
     }
+
+	public void PlayedDied(){
+		deadPlayers++;
+	}
 
 }

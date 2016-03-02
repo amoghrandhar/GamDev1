@@ -6,8 +6,11 @@ public class DestroyBySide : MonoBehaviour {
 	public GameObject explosion;
 	public AudioSource audio;
 
+	private GameController gc;
+
 	void Start() {
 		audio = GetComponent<AudioSource>();
+		gc = (GameController) GameObject.Find ("GameController").GetComponent<GameController> ();
 	}
 
 	void OnTriggerExit(Collider other){
@@ -18,10 +21,12 @@ public class DestroyBySide : MonoBehaviour {
 			ShipController playerController = player.GetComponent<ShipController> ();
 
 			if (playerController.isReleased()) {
-				Destroy (other.gameObject);
+				gc.PlayedDied ();
 				Instantiate (explosion, other.transform.position, other.transform.rotation);
 				if(other.tag == "Player")
 					audio.Play ();
+				Destroy (other.gameObject);
+
 			}
 
 		}
