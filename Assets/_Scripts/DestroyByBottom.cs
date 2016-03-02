@@ -18,7 +18,7 @@ public class DestroyByBottom : MonoBehaviour {
 		
 		if (other.tag == "Player") {
 			// Notify GameController that a player has died
-			gc.PlayedDied ();
+			gc.PlayerDied ();
 
 			//  Play sound
 			Instantiate (explosion, other.transform.position, other.transform.rotation);

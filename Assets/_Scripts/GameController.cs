@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class GameController : MonoBehaviour
@@ -23,6 +24,9 @@ public class GameController : MonoBehaviour
 	public Text player3score;
 	public Text player4score;
 
+	// Game text
+	public Text gameOverText;
+
     //Asteroids
     private AsteroidController asteroidHandler;
 
@@ -36,6 +40,7 @@ public class GameController : MonoBehaviour
     private int asteroidCount;
 
 	private int numberOfPlayers;
+	private bool gameOver;
 
     // Use this for initialization
     void Start()
@@ -66,6 +71,8 @@ public class GameController : MonoBehaviour
 			player2score.text = "";
 		}			
 
+		gameOver = false;
+		gameOverText.text = "";
         asteroidHandler = asteroid.GetComponent<AsteroidController>();
         asteroidHandler.speed = 1.5f;
         deadPlayers = 0;
@@ -75,11 +82,29 @@ public class GameController : MonoBehaviour
     }
 
 	void Update(){
-		// Update scores of players
-		if(numberOfPlayers >3) player4score.text = "P4 score: " + shipController4.getAsteroidCount();
-		if(numberOfPlayers >2) player3score.text = "P3 score: " + shipController3.getAsteroidCount();
-		if(numberOfPlayers >1) player2score.text = "P2 score: " + shipController2.getAsteroidCount();
-		player1score.text = "P1 score: " + shipController.getAsteroidCount ();
+		Debug.Log (deadPlayers + " " + numberOfPlayers);
+		if (!gameOver) {
+			// Update scores of players
+			if (numberOfPlayers > 3)
+				player4score.text = "P4 score: " + shipController4.getAsteroidCount ();
+			if (numberOfPlayers > 2)
+				player3score.text = "P3 score: " + shipController3.getAsteroidCount ();
+			if (numberOfPlayers > 1)
+				player2score.text = "P2 score: " + shipController2.getAsteroidCount ();
+			player1score.text = "P1 score: " + shipController.getAsteroidCount ();
+
+			// Check if the game is over
+			if (deadPlayers >= numberOfPlayers) {
+				gameOver = true;
+				gameOverText.text = "Game over!\nPress 'R' to restart or 'Esc' to go back to the menu";		
+			}
+		} else {
+			if (Input.GetKey ("escape"))
+				SceneManager.LoadScene ("Menu");
+
+			if (Input.GetKey ("r"))
+				SceneManager.LoadScene ("OrbitScene");
+		}
 	}
 
     IEnumerator startWaves()
@@ -106,7 +131,7 @@ public class GameController : MonoBehaviour
     IEnumerator SpawnWaves()
     {
         yield return new WaitForSeconds(0);
-        while (true)
+		while (!gameOver)
         {
 
             if (asteroidCount % 4 == 0)
@@ -130,7 +155,7 @@ public class GameController : MonoBehaviour
     }
 
 
-    public void PlayedDied()
+    public void PlayerDied()
     {
         deadPlayers++;
     }

@@ -21,7 +21,7 @@ public class DestroyBySide : MonoBehaviour {
 			ShipController playerController = player.GetComponent<ShipController> ();
 
 			if (playerController.isReleased()) {
-				gc.PlayedDied ();
+				gc.PlayerDied ();
 				Instantiate (explosion, other.transform.position, other.transform.rotation);
 				if(other.tag == "Player")
 					audio.Play ();

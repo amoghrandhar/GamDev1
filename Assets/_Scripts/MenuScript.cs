@@ -14,7 +14,7 @@ public class MenuScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		playerCount = -1;
+		playerCount = 1;
 		quitMenu = quitMenu.GetComponent<Canvas> ();
 		playerNumberMenu = playerNumberMenu.GetComponent<Canvas> ();
 		startText = startText.GetComponent<Button> ();
