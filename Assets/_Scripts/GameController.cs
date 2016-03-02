@@ -11,6 +11,10 @@ public class GameController : MonoBehaviour
     private ShipController shipController;
     public GameObject ship2;
     private ShipController shipController2;
+	public GameObject ship3;
+	private ShipController shipController3;
+	public GameObject ship4;
+	private ShipController shipController4;
 
     //Asteroids
     private AsteroidController asteroidHandler;
@@ -29,8 +33,17 @@ public class GameController : MonoBehaviour
     {
         music = GetComponent<AudioSource>();
         music.Play();
+
+		//Get ship controller instances
         shipController = ship.GetComponent<ShipController>();
         shipController2 = ship2.GetComponent<ShipController>();
+		shipController3 = ship3.GetComponent<ShipController>();
+		shipController4 = ship4.GetComponent<ShipController>();
+
+
+		// Initalise game for correct number of players
+
+
         asteroidHandler = asteroid.GetComponent<AsteroidController>();
         asteroidHandler.speed = 1.5f;
         deadPlayers = 0;
@@ -39,12 +52,21 @@ public class GameController : MonoBehaviour
 
     }
 
+	void Update(){
+
+	}
+
     IEnumerator startWaves()
     {
         yield return new WaitForSeconds(0);
+
         while (true)
         {
-            if (shipController.getAsteroidCount() > 0 || shipController2.getAsteroidCount() > 0 )
+			// Start spawning waves when a ship has reached the initial asteroid
+            if (shipController.getAsteroidCount() > 0 || 
+				shipController2.getAsteroidCount() > 0 || 
+				shipController3.getAsteroidCount() > 0 || 
+				shipController4.getAsteroidCount() > 0 )
             {
                 StartCoroutine(SpawnWaves());
                 break;
