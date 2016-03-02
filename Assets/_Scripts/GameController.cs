@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class GameController : MonoBehaviour
@@ -16,6 +17,12 @@ public class GameController : MonoBehaviour
 	public GameObject ship4;
 	private ShipController shipController4;
 
+	// Score texts
+	public Text player1score;
+	public Text player2score;
+	public Text player3score;
+	public Text player4score;
+
     //Asteroids
     private AsteroidController asteroidHandler;
 
@@ -27,6 +34,8 @@ public class GameController : MonoBehaviour
     public float spawnWait, waveWait;
     public float asteroidCountToStartWith;
     private int asteroidCount;
+
+	private int numberOfPlayers;
 
     // Use this for initialization
     void Start()
@@ -42,11 +51,20 @@ public class GameController : MonoBehaviour
 
 
 		// Initalise game for correct number of players
-		if(MenuScript.playerCount <4) ship4.SetActive(false);
-		if(MenuScript.playerCount <3) ship3.SetActive(false);
-		if(MenuScript.playerCount <2) ship2.SetActive(false);
+		numberOfPlayers = MenuScript.playerCount;
 
-			
+		if (numberOfPlayers < 4) {
+			ship4.SetActive (false);
+			player4score.text = "";
+		}
+		if (numberOfPlayers < 3) {
+			ship3.SetActive (false);
+			player3score.text = "";
+		}
+		if (numberOfPlayers < 2) {
+			ship2.SetActive (false);
+			player2score.text = "";
+		}			
 
         asteroidHandler = asteroid.GetComponent<AsteroidController>();
         asteroidHandler.speed = 1.5f;
@@ -57,7 +75,11 @@ public class GameController : MonoBehaviour
     }
 
 	void Update(){
-
+		// Update scores of players
+		if(numberOfPlayers >3) player4score.text = "P4 score: " + shipController4.getAsteroidCount();
+		if(numberOfPlayers >2) player3score.text = "P3 score: " + shipController3.getAsteroidCount();
+		if(numberOfPlayers >1) player2score.text = "P2 score: " + shipController2.getAsteroidCount();
+		player1score.text = "P1 score: " + shipController.getAsteroidCount ();
 	}
 
     IEnumerator startWaves()
