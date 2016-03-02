@@ -49,6 +49,7 @@
      <Compile Include="Assets\_Scripts\AsteroidRotator.cs" />
      <Compile Include="Assets\_Scripts\DestroyByBottom.cs" />
      <Compile Include="Assets\_Scripts\DestroyBySide.cs" />
+     <Compile Include="Assets\_Scripts\FlashingText.cs" />
      <Compile Include="Assets\_Scripts\GameController.cs" />
      <Compile Include="Assets\_Scripts\NewBehaviourScript.cs" />
      <Compile Include="Assets\_Scripts\ShipController.cs" />

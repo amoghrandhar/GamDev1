@@ -4,19 +4,26 @@ using System.Collections;
 public class DestroyBySide : MonoBehaviour {
 
 	public GameObject explosion;
+	public AudioSource audio;
 
-	void Start (){
-		// Get reference to ShipController
+	void Start() {
+		audio = GetComponent<AudioSource>();
 	}
 
-	void OnTriggerExit(Collider other)
-	{
+	void OnTriggerExit(Collider other){
+		
 		if (other.tag == "Player") {
-			// Call destroy method on ShipController, which checks if the player is orbiting an asteroid before destroying it
-		} else {
-			// Destroy asteroids that have gone off-screen
-			Instantiate(explosion, other.transform.position, other.transform.rotation);
-			Destroy(other.gameObject);
+
+			GameObject player = other.gameObject;
+			ShipController playerController = player.GetComponent<ShipController> ();
+
+			if (playerController.isReleased()) {
+				Destroy (other.gameObject);
+				Instantiate (explosion, other.transform.position, other.transform.rotation);
+				if(other.tag == "Player")
+					audio.Play ();
+			}
+
 		}
 
 	}

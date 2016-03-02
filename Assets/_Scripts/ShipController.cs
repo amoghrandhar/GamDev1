@@ -147,4 +147,10 @@ public class ShipController : MonoBehaviour {
 
 	}
 
+	public bool isReleased(){
+
+		return released;
+
+	}
+
 }
