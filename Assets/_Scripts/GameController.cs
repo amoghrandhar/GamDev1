@@ -82,7 +82,7 @@ public class GameController : MonoBehaviour
     }
 
 	void Update(){
-		Debug.Log (deadPlayers + " " + numberOfPlayers);
+//		Debug.Log (deadPlayers + " " + numberOfPlayers);
 		if (!gameOver) {
 			// Update scores of players
 			if (numberOfPlayers > 3)
