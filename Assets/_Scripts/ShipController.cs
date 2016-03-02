@@ -3,6 +3,8 @@ using System.Collections;
 
 public class ShipController : MonoBehaviour {
 
+	public int playerNumber;
+
 	public float speed;
 	public float asteroidBoost;
 	public bool clockwise;
@@ -14,6 +16,7 @@ public class ShipController : MonoBehaviour {
 	private bool released;
 
 	public AudioSource audio;
+
 	private int asteroidCount;
 	private float time;
 	private bool gameStarted;
