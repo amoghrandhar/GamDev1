@@ -1837,6 +1837,8 @@ MonoBehaviour:
   asteroid: {fileID: 162518, guid: e159d4d98121df64dafa1913e38f0928, type: 2}
   ship: {fileID: 41667237}
   ship2: {fileID: 1806936234}
+  ship3: {fileID: 1271408290}
+  ship4: {fileID: 1054722145}
   music: {fileID: 1453383327}
   spawnValues: {x: 11.5, y: 0, z: 17}
   spawnWait: 2

@@ -42,7 +42,11 @@ public class GameController : MonoBehaviour
 
 
 		// Initalise game for correct number of players
+		if(MenuScript.playerCount <4) ship4.SetActive(false);
+		if(MenuScript.playerCount <3) ship3.SetActive(false);
+		if(MenuScript.playerCount <2) ship2.SetActive(false);
 
+			
 
         asteroidHandler = asteroid.GetComponent<AsteroidController>();
         asteroidHandler.speed = 1.5f;
