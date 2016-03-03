@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿/*
+ * Author: Amogh Randhar, Daniel Cao, Kwong Chi Tam
+ */
+
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
@@ -13,9 +17,10 @@ public class GameController : MonoBehaviour {
 
 	// Score texts
 	public Text player1score, player2score, player3score, player4score;
+	public Image player1ship, player2ship, player3ship, player4ship;
 
 	// Game text
-	public Text gameOverText;
+	public Text gameOverTitle, gameOverText;
 
     //Asteroids
 	private AsteroidController asteroidHandler, fastAsteroidController, slowAsteroidController;
@@ -23,13 +28,13 @@ public class GameController : MonoBehaviour {
     public AudioSource music;
     private int deadPlayers;
 
-    //Spwan Related Variables
+    //Spawn Related Variables
     public Vector3 spawnValues;
     public float spawnWait, waveWait;
     public float asteroidCountToStartWith;
     private int asteroidCount;
-
 	private int numberOfPlayers;
+
 	private bool gameStart, gameOver;
 
     void Start() {
@@ -51,19 +56,23 @@ public class GameController : MonoBehaviour {
 		if (numberOfPlayers < 4) {
 			ship4.SetActive (false);
 			player4score.text = "";
+			player4ship.enabled = false;
 		}
 		if (numberOfPlayers < 3) {
 			ship3.SetActive (false);
 			player3score.text = "";
+			player3ship.enabled = false;
 		}
 		if (numberOfPlayers < 2) {
 			ship2.SetActive (false);
 			player2score.text = "";
+			player2ship.enabled = false;
 		}			
 
 		// Initialise game state
 		gameOver = false;
 		gameStart = false;
+		gameOverTitle.text = "";
 		gameOverText.text = "";
 		deadPlayers = 0;
 		asteroidCount = 0;
@@ -74,9 +83,9 @@ public class GameController : MonoBehaviour {
 		slowAsteroidController = slowAsteroid.GetComponent<AsteroidController> ();
 
 		// Set initial speeds of asteroids
-        asteroidHandler.speed = 1.5f;
-		fastAsteroidController.speed = 2f;
-		slowAsteroidController.speed = 1f;
+        asteroidHandler.speed = 1f;
+		fastAsteroidController.speed = 1.2f;
+		slowAsteroidController.speed = 0.8f;
 
         StartCoroutine(StartWaves());
 
@@ -87,18 +96,26 @@ public class GameController : MonoBehaviour {
 		if (!gameOver) {
 			
 			// Update scores of players
-			if (numberOfPlayers > 3)
-				player4score.text = "P4 score: " + shipController4.getAsteroidCount ();
-			if (numberOfPlayers > 2)
-				player3score.text = "P3 score: " + shipController3.getAsteroidCount ();
-			if (numberOfPlayers > 1)
-				player2score.text = "P2 score: " + shipController2.getAsteroidCount ();
-			player1score.text = "P1 score: " + shipController.getAsteroidCount ();
+			if (numberOfPlayers > 3) {
+				player4score.text = "P4 (J) score: " + shipController4.getAsteroidCount ();
+				player4ship.enabled = true;
+			}
+			if (numberOfPlayers > 2) {
+				player3score.text = "P3 (A) score: " + shipController3.getAsteroidCount ();
+				player3ship.enabled = true;
+			}
+			if (numberOfPlayers > 1) {
+				player2score.text = "P2 (F) score: " + shipController2.getAsteroidCount ();
+				player2ship.enabled = true;
+			}
+			player1score.text = "P1 (L. Click) score: " + shipController.getAsteroidCount ();
+			player1ship.enabled = true;
 
 			// Check if the game is over
 			if (deadPlayers >= numberOfPlayers) {
 				gameOver = true;
-				gameOverText.text = "Game over!\nPress 'R' to restart or 'Esc' to go back to the menu";		
+				gameOverTitle.text = "Game Over !";
+				StartCoroutine(BlinkText ());
 			}
 
 		} else {
@@ -109,6 +126,15 @@ public class GameController : MonoBehaviour {
 			if (Input.GetKey ("r"))
 				SceneManager.LoadScene ("OrbitScene");
 			
+		}
+	}
+
+	public IEnumerator BlinkText() {
+		while (gameOver) {
+			gameOverText.text = "Press 'R' to restart \n\nPress 'Esc' to go back to the menu";
+			yield return new WaitForSeconds (.7f);
+			gameOverText.text = "";
+			yield return new WaitForSeconds (.5f);
 		}
 	}
 
@@ -143,11 +169,11 @@ public class GameController : MonoBehaviour {
 		while (!gameOver) {
 
 			// For every 4 asteroids spawned, increase speed
-            if (asteroidCount % 4 == 0) {
-                asteroidHandler.speed += 1.2f;
-				fastAsteroidController.speed += 1.6f;
-				slowAsteroidController.speed += 0.5f;
-                shipController.asteroidBoost += 30;
+            if (asteroidCount % 5 == 0) {
+                asteroidHandler.speed += 0.8f;
+				fastAsteroidController.speed += 0.8f;
+				slowAsteroidController.speed += 0.4f;
+                shipController.asteroidBoost += 20;
                 spawnWait -= 0.1f;
 				waveWait -= 0.1f;
             }
@@ -161,10 +187,13 @@ public class GameController : MonoBehaviour {
                 yield return new WaitForSeconds(spawnWait);
             }
 
-			// For every 4 asteroids spawned, spawn special asteroids with a random chance
-			if (asteroidCount % 4 == 0) {
-				if(Random.value >= 0.5) createFastAsteroid();
+			// For every 5 asteroids spawned, spawn special asteroids with a random chance
+			if (asteroidCount > 8 && asteroidCount % 4 == 0) {
 				if(Random.value < 0.5) createSlowAsteroid();
+			}
+
+			if (asteroidCount > 12 && asteroidCount % 4 == 0) {
+				if(Random.value >= 0.5) createFastAsteroid ();
 			}
 
             yield return new WaitForSeconds(waveWait);

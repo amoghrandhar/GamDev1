@@ -82,7 +82,7 @@ public class ShipController : MonoBehaviour {
 					rb.transform.RotateAround (rb.position, Vector3.up, 90.0f);
 
 				// Move with asteroid
-				transform.position += Vector3.back * Time.deltaTime;
+				transform.position += -1 * Vector3.forward * Time.deltaTime;
 
 				// Rotate around asteroid
 				if (clockwise == true)
@@ -118,10 +118,13 @@ public class ShipController : MonoBehaviour {
 			asteroidSpeed = astMover.speed;
 
 			// Modify ship speed if it collides with a special asteroid
-		    if (astMover.asteroidType == AsteroidController.AsteroidType.FAST)
-				if (asteroidBoost < 320) asteroidBoost += 50 ;
-		    else if (astMover.asteroidType == AsteroidController.AsteroidType.SLOW)
-				if (asteroidBoost > 80) asteroidBoost -= 50;
+			if (astMover.asteroidType == AsteroidController.AsteroidType.FAST) {
+				if (asteroidBoost < 300)
+					asteroidBoost += 50;
+			} else if (astMover.asteroidType == AsteroidController.AsteroidType.SLOW) {
+				if (asteroidBoost > 80)
+					asteroidBoost -= 50;
+			}
 
 			// Start moving earth if ship collides with it
 			if (other.tag == "Asteroid1")
